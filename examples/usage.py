@@ -11,7 +11,11 @@ from pathlib import Path
 from typing import List, Dict, Optional
 
 
-def load_emoji_metadata(metadata_path: str = "emojis/metadata.json") -> Dict:
+# Default path to the metadata file
+DEFAULT_METADATA_PATH = "emojis/metadata.json"
+
+
+def load_emoji_metadata(metadata_path: str = DEFAULT_METADATA_PATH) -> Dict:
     """
     Load emoji metadata from the JSON file.
     
@@ -97,15 +101,14 @@ def main():
     """Example usage of emoji functions."""
     
     # Check if metadata exists
-    metadata_path = "emojis/metadata.json"
-    if not Path(metadata_path).exists():
+    if not Path(DEFAULT_METADATA_PATH).exists():
         print("❌ Metadata file not found!")
         print("Please run: python3 download_emojis.py")
         return
     
     # Load metadata
     print("Loading emoji metadata...")
-    metadata = load_emoji_metadata(metadata_path)
+    metadata = load_emoji_metadata()
     print(f"✅ Loaded {len(metadata['emojis'])} emojis\n")
     
     # Example 1: Find emojis by name

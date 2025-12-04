@@ -75,10 +75,10 @@ def sanitize_filename(name: str, codepoint: str) -> str:
     Returns:
         Sanitized filename string
     """
-    filename = f"{name}_{codepoint}.gif"
-    # Replace any characters that might be problematic in filenames
-    # Allow alphanumeric, dots, dashes, and underscores only
-    return "".join(c if c.isalnum() or c in "._-" else "_" for c in filename)
+    # Sanitize name and codepoint separately to avoid issues with dots
+    safe_name = "".join(c if c.isalnum() or c in "_-" else "_" for c in name)
+    safe_codepoint = "".join(c if c.isalnum() or c in "_-" else "_" for c in codepoint)
+    return f"{safe_name}_{safe_codepoint}.gif"
 
 
 def download_emoji(codepoint: str, name: str, output_dir: Path, size: int = 512) -> bool:
